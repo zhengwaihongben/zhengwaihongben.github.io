@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A short note on topology, continuity, and mathematical structure.">
+  <title>On the Beauty of Topology | A Mathematician’s Journal</title>
+  <link rel="stylesheet" href="../../style_blog.css">
+
+  <!-- MathJax configuration: supports LaTeX inline and display mathematics. -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)'], ['$', '$']],
+        displayMath: [['\\[', '\\]'], ['$$', '$$']],
+        processEscapes: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+  <!-- Highlight.js: syntax highlighting for code blocks. -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github.min.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/python.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/cpp.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/sql.min.js"></script>
+  <script defer>
+    document.addEventListener('DOMContentLoaded', function () {
+      if (window.hljs) {
+        document.querySelectorAll('pre code').forEach(function (block) {
+          hljs.highlightElement(block);
+        });
+      }
+    });
+  </script>
+</head>
+
+<body class="blog-page">
+  <header class="sitebar">
+    <div class="wrap sitebar-inner">
+      <a class="brand" href="../classical.html">
+        <span class="brand-mark" aria-hidden="true">∑</span>
+        PERSONAL JOURNAL
+      </a>
+      <nav class="nav" aria-label="Article navigation">
+        <a href="../classical.html">← BACK TO ENTRIES</a>
+        <a href="../classical_zh.html" lang="zh-Hant">中文</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="article-layout">
+    <div class="article-kicker">MATHEMATICS&nbsp; / &nbsp;TOPOLOGY</div>
+    <h1>On the Beauty of Topology</h1>
+    <div class="article-meta">25 NOVEMBER 2026 &nbsp; / &nbsp; 8 MIN READ &nbsp; / &nbsp; NOTE 001</div>
+
+    <section class="abstract" aria-label="Abstract">
+      <strong>ABSTRACT</strong>
+      This short note considers why topology offers a useful language for
+      studying spaces through the properties preserved by continuous
+      transformations.
+    </section>
+
+    <article class="article-body">
+      <h2>1. Introduction</h2>
+      <p>
+        Some mathematical ideas are powerful because they allow us to ignore
+        details that are not essential to the question. Topology is one such
+        language: instead of measuring exact distances, it asks which
+        properties remain unchanged under continuous deformation.
+      </p>
+
+      <p>
+        The purpose of this note is to introduce the basic viewpoint of
+        topology and to illustrate how definitions, propositions, and proofs
+        can be presented in a mathematical article.
+      </p>
+
+      <h2>2. A definition to begin with</h2>
+      <div class="math-block definition">
+        <span class="math-label">Definition 2.1 · Topological space</span>
+        A topological space is a pair \((X, \mathcal{T})\), where \(X\) is a
+        set and \(\mathcal{T}\) is a collection of subsets of \(X\) such that:
+        <ol>
+          <li>\(\varnothing, X \in \mathcal{T}\);</li>
+          <li>arbitrary unions of elements of \(\mathcal{T}\) belong to \(\mathcal{T}\);</li>
+          <li>finite intersections of elements of \(\mathcal{T}\) belong to \(\mathcal{T}\).</li>
+        </ol>
+        The elements of \(\mathcal{T}\) are called open sets.
+      </div>
+
+      <p>
+        The definition is compact, but it opens the door to a broad family of
+        objects and questions. The point is not merely to generalise distance;
+        it is to identify which structures are worth preserving.
+      </p>
+
+      <div class="formula">
+        \[
+          f : X \longrightarrow Y
+        \]
+      </div>
+
+      <h2>3. A theorem-shaped perspective</h2>
+      <div class="math-block theorem">
+        <span class="math-label">Theorem 3.1 · Illustrative statement</span>
+        A continuous image of a compact topological space is compact.
+      </div>
+
+      <div class="proof">
+        <span class="proof-label">Proof.</span>
+        Let \(f:X\to Y\) be continuous and let \(X\) be compact. Given an
+        open cover of \(f(X)\), its inverse images under \(f\) form an open
+        cover of \(X\). Compactness gives a finite subcover, whose
+        corresponding sets cover \(f(X)\). Hence \(f(X)\) is compact.
+        <span class="qed">∎</span>
+      </div>
+
+      <p>
+        This example illustrates the standard structure of a mathematical
+        argument: state the result precisely, identify the relevant
+        hypothesis, and use the definitions to establish the conclusion.
+      </p>
+
+      <h2>4. Including code</h2>
+      <p>
+        Articles can also include source code. For example, the following
+        Python function computes the Euclidean distance between two vectors:
+      </p>
+
+      <figure class="code-figure">
+        <figcaption class="code-caption">Python · Euclidean distance</figcaption>
+        <pre><code class="language-python">from math import sqrt
+
+def euclidean_distance(x, y):
+    if len(x) != len(y):
+        raise ValueError("Vectors must have the same dimension")
+
+    return sqrt(sum((a - b) ** 2 for a, b in zip(x, y)))
+
+
+u = (1, 2, 3)
+v = (4, 5, 6)
+
+print(euclidean_distance(u, v))</code></pre>
+      </figure>
+
+      <h2>5. Tables and figures</h2>
+      <p>
+        A table can be used to compare mathematical objects or summarise
+        computational results.
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Concept</th>
+              <th>Basic idea</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Metric space</td>
+              <td>A set equipped with a distance function.</td>
+            </tr>
+            <tr>
+              <td>Topological space</td>
+              <td>A set equipped with a collection of open sets.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <blockquote>
+        Good mathematical exposition is not only about presenting results;
+        it is also about making the underlying structure visible.
+      </blockquote>
+
+      <section class="references">
+        <h2>References</h2>
+        <ol>
+          <li>J. R. Munkres, <em>Topology</em>, 2nd ed., Prentice Hall, 2000.</li>
+        </ol>
+      </section>
+    </article>
+
+    <div class="article-end">
+      END OF NOTE&nbsp; / &nbsp;RETURN TO THE JOURNAL
+    </div>
+  </main>
+
+  <footer class="wrap footer">
+    <span>© 2026 PERSONAL JOURNAL</span>
+    <a href="../classical.html">BACK TO INDEX ↑</a>
+  </footer>
+</body>
+</html>

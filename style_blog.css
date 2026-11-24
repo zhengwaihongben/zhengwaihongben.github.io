@@ -1,0 +1,632 @@
+/* =========================================================
+   PERSONAL BLOG — Classical Academic
+   File: style_blog.css
+   This stylesheet is intentionally independent of style.css.
+   ========================================================= */
+
+:root {
+  --blog-paper: #fbfaf5;
+  --blog-ink: #1a1a1a;
+  --blog-muted: #73736d;
+  --blog-red: #7a2028;
+  --blog-blue: #284d72;
+  --blog-rule: #d8d8c8;
+  --blog-grid: rgba(120, 110, 80, .075);
+  --blog-card: #fffefa;
+  --blog-code: #f1f0e9;
+  --blog-serif: "STIX Two Text", "Noto Serif TC", "Latin Modern Roman", Georgia, "Times New Roman", serif;
+  --blog-mono: "Fira Code", "Consolas", "Noto Sans Mono", monospace;
+  --blog-content-width: 760px;
+}
+
+.blog-page,
+.blog-page *,
+.blog-page *::before,
+.blog-page *::after {
+  box-sizing: border-box;
+}
+
+.blog-page {
+  min-height: 100vh;
+  margin: 0;
+  color: var(--blog-ink);
+  background: var(--blog-paper);
+  font-family: var(--blog-serif);
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.blog-page a {
+  color: inherit;
+  text-decoration: none;
+  transition: color .18s ease, border-color .18s ease;
+}
+
+.blog-page a:hover {
+  color: var(--blog-red);
+}
+
+.blog-page img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.blog-page button,
+.blog-page input,
+.blog-page textarea,
+.blog-page select {
+  font: inherit;
+}
+
+.blog-page .wrap {
+  width: min(1080px, calc(100% - 48px));
+  margin: 0 auto;
+}
+
+.blog-page .mono,
+.blog-page .eyebrow,
+.blog-page .date,
+.blog-page .category,
+.blog-page .serial,
+.blog-page .article-meta,
+.blog-page .nav,
+.blog-page .hero-note,
+.blog-page .section-head > span,
+.blog-page .footer,
+.blog-page .math-label,
+.blog-page .code-caption {
+  font-family: var(--blog-mono);
+  letter-spacing: .045em;
+}
+
+/* Header and navigation */
+.blog-page .sitebar {
+  border-bottom: 1px solid var(--blog-rule);
+  background: rgba(251, 250, 245, .96);
+}
+
+.blog-page .sitebar-inner {
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.blog-page .brand {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  font-size: 1.02rem;
+  font-weight: 700;
+  letter-spacing: .095em;
+}
+
+.blog-page .brand-mark {
+  margin-right: 9px;
+  color: var(--blog-red);
+  font-size: 1.45rem;
+}
+
+.blog-page .nav {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 23px;
+  color: var(--blog-muted);
+  font-size: .72rem;
+}
+
+.blog-page .nav a {
+  padding: 8px 0 6px;
+  border-bottom: 1px solid transparent;
+}
+
+.blog-page .nav a:hover,
+.blog-page .nav a.active {
+  color: var(--blog-red);
+  border-bottom-color: var(--blog-red);
+}
+
+/* Homepage: Classical Academic */
+.blog-page .hero {
+  padding: 88px 0 68px;
+  border-bottom: 1px solid var(--blog-rule);
+  text-align: center;
+}
+
+.blog-page .eyebrow {
+  color: var(--blog-red);
+  font-size: .68rem;
+  text-transform: uppercase;
+}
+
+.blog-page .hero h1 {
+  max-width: 900px;
+  margin: 22px auto 20px;
+  font-size: clamp(2.8rem, 6.5vw, 5.25rem);
+  line-height: 1.08;
+  font-weight: 500;
+  letter-spacing: -.035em;
+}
+
+.blog-page .hero p {
+  max-width: 610px;
+  margin: 0 auto;
+  color: var(--blog-muted);
+  font-size: 1.04rem;
+}
+
+.blog-page .hero-foot {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px 34px;
+  margin-top: 38px;
+}
+
+.blog-page .hero-note {
+  color: var(--blog-muted);
+  font-size: .65rem;
+  text-transform: uppercase;
+}
+
+.blog-page .section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 40px 0 17px;
+  border-bottom: 3px double var(--blog-ink);
+}
+
+.blog-page .section-head h2 {
+  margin: 0;
+  font-size: 1.48rem;
+  font-weight: 500;
+}
+
+.blog-page .section-head > span {
+  color: var(--blog-muted);
+  font-size: .66rem;
+}
+
+.blog-page .entries {
+  padding-bottom: 64px;
+}
+
+.blog-page .entry {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  align-items: start;
+  gap: 22px;
+  padding: 26px 0 28px;
+  border-bottom: 1px solid var(--blog-rule);
+}
+
+.blog-page .entry:hover {
+  padding-left: 0;
+}
+
+.blog-page .date {
+  padding-top: 5px;
+  color: var(--blog-muted);
+  font-size: .66rem;
+  line-height: 1.65;
+}
+
+.blog-page .category {
+  color: var(--blog-red);
+  font-size: .63rem;
+  text-transform: uppercase;
+}
+
+.blog-page .entry h3 {
+  margin: 6px 0 7px;
+  font-size: clamp(1.28rem, 2.4vw, 1.8rem);
+  line-height: 1.25;
+  font-weight: 500;
+}
+
+.blog-page .entry p {
+  max-width: 680px;
+  margin: 0;
+  color: var(--blog-muted);
+  font-size: .91rem;
+}
+
+.blog-page .entry-placeholder {
+  cursor: default;
+}
+
+.blog-page .entry-placeholder:hover {
+  color: inherit;
+}
+
+/* Article layout */
+.blog-page .article-layout {
+  width: min(var(--blog-content-width), calc(100% - 48px));
+  margin: 0 auto;
+  padding: 58px 0 88px;
+}
+
+.blog-page .article-kicker {
+  color: var(--blog-red);
+  font-family: var(--blog-mono);
+  font-size: .68rem;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+
+.blog-page .article-layout h1 {
+  margin: 15px 0 13px;
+  font-size: clamp(2.45rem, 5.8vw, 4.25rem);
+  line-height: 1.1;
+  font-weight: 500;
+  letter-spacing: -.035em;
+}
+
+.blog-page .article-meta {
+  margin: 17px 0 34px;
+  color: var(--blog-muted);
+  font-size: .66rem;
+  text-transform: uppercase;
+}
+
+.blog-page .abstract {
+  margin: 30px 0 38px;
+  padding: 19px 0 21px;
+  border-top: 1px solid var(--blog-rule);
+  border-bottom: 1px solid var(--blog-rule);
+  color: #4e4e49;
+}
+
+.blog-page .abstract strong {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--blog-red);
+  font-family: var(--blog-mono);
+  font-size: .66rem;
+  letter-spacing: .07em;
+}
+
+.blog-page .article-body {
+  overflow-wrap: anywhere;
+}
+
+.blog-page .article-body h2 {
+  margin: 48px 0 13px;
+  font-size: 1.55rem;
+  line-height: 1.35;
+  font-weight: 500;
+}
+
+.blog-page .article-body h3 {
+  margin: 30px 0 10px;
+  color: var(--blog-blue);
+  font-size: 1.18rem;
+  font-weight: 600;
+}
+
+.blog-page .article-body p {
+  margin: 14px 0;
+}
+
+.blog-page .article-body ul,
+.blog-page .article-body ol {
+  margin: 14px 0 18px 1.5rem;
+  padding-left: .5rem;
+}
+
+.blog-page .article-body li {
+  margin: 5px 0;
+}
+
+.blog-page .article-body blockquote {
+  margin: 24px 0;
+  padding: 5px 0 5px 20px;
+  border-left: 2px solid var(--blog-rule);
+  color: var(--blog-muted);
+  font-style: italic;
+}
+
+.blog-page .article-body a,
+.blog-page .references a {
+  color: var(--blog-blue);
+  border-bottom: 1px solid rgba(40, 77, 114, .28);
+}
+
+.blog-page .article-body a:hover,
+.blog-page .references a:hover {
+  color: var(--blog-red);
+  border-color: var(--blog-red);
+}
+
+/* Mathematical structures */
+.blog-page .math-block {
+  margin: 23px 0;
+  padding: 16px 19px;
+  background: var(--blog-card);
+  border-left: 3px solid var(--blog-blue);
+}
+
+.blog-page .math-block.definition,
+.blog-page .math-block.proposition,
+.blog-page .math-block.lemma,
+.blog-page .math-block.corollary {
+  background: #f1f5f8;
+  border-left-color: var(--blog-blue);
+}
+
+.blog-page .math-block.theorem {
+  background: #fbf1f0;
+  border-left-color: var(--blog-red);
+}
+
+.blog-page .math-block.example {
+  background: #f8f5eb;
+  border-left-color: #9a7629;
+}
+
+.blog-page .math-block.remark {
+  background: #f3f2ed;
+  border-left-color: #77766f;
+}
+
+.blog-page .math-label {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--blog-blue);
+  font-size: .68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.blog-page .theorem .math-label {
+  color: var(--blog-red);
+}
+
+.blog-page .proof {
+  margin: 22px 0;
+  padding: 4px 0 4px 18px;
+  border-left: 1px dashed #aaa99f;
+  color: #55554f;
+}
+
+.blog-page .proof-label {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--blog-ink);
+  font-weight: 700;
+  font-style: normal;
+}
+
+.blog-page .qed {
+  float: right;
+  padding-left: 8px;
+  font-style: normal;
+}
+
+.blog-page .formula {
+  margin: 24px 0;
+  padding: 17px 12px;
+  text-align: center;
+  overflow-x: auto;
+  background: rgba(255, 255, 255, .45);
+}
+
+.blog-page .math-inline {
+  white-space: normal;
+}
+
+/* MathJax: keep long display equations from breaking the page */
+.blog-page mjx-container[display="true"] {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 3px 0;
+}
+
+/* Code blocks and syntax highlighting */
+.blog-page .code-figure {
+  margin: 24px 0;
+}
+
+.blog-page .code-caption {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--blog-muted);
+  font-size: .64rem;
+  text-transform: uppercase;
+}
+
+.blog-page pre {
+  max-width: 100%;
+  margin: 0;
+  padding: 18px 20px;
+  overflow-x: auto;
+  border: 1px solid #e1dfd5;
+  border-left: 3px solid var(--blog-blue);
+  background: var(--blog-code);
+  color: #242424;
+  font-family: var(--blog-mono);
+  font-size: .82rem;
+  line-height: 1.65;
+  tab-size: 4;
+  -webkit-overflow-scrolling: touch;
+}
+
+.blog-page pre code {
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  white-space: pre;
+}
+
+.blog-page :not(pre) > code {
+  padding: .12em .35em;
+  border: 1px solid #e6e3d9;
+  background: var(--blog-code);
+  font-family: var(--blog-mono);
+  font-size: .86em;
+  overflow-wrap: anywhere;
+}
+
+/* Tables, figures, references */
+.blog-page .table-wrap {
+  max-width: 100%;
+  margin: 24px 0;
+  overflow-x: auto;
+}
+
+.blog-page table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .9rem;
+}
+
+.blog-page th,
+.blog-page td {
+  padding: 9px 12px;
+  border: 1px solid var(--blog-rule);
+  text-align: left;
+  vertical-align: top;
+}
+
+.blog-page th {
+  background: #efeee6;
+  font-weight: 600;
+}
+
+.blog-page figure {
+  margin: 28px 0;
+}
+
+.blog-page figure img {
+  width: 100%;
+  border: 1px solid var(--blog-rule);
+}
+
+.blog-page figcaption {
+  margin-top: 8px;
+  color: var(--blog-muted);
+  font-size: .82rem;
+  text-align: center;
+}
+
+.blog-page .references {
+  margin-top: 55px;
+  padding-top: 20px;
+  border-top: 1px solid var(--blog-rule);
+}
+
+.blog-page .references h2 {
+  margin-top: 0;
+  font-size: 1.3rem;
+}
+
+.blog-page .references ol {
+  padding-left: 1.5rem;
+}
+
+.blog-page .article-end {
+  margin-top: 52px;
+  padding-top: 18px;
+  border-top: 3px double var(--blog-ink);
+  color: var(--blog-muted);
+  font-family: var(--blog-mono);
+  font-size: .66rem;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+/* Footer */
+.blog-page .footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 24px 0 34px;
+  border-top: 1px solid var(--blog-rule);
+  color: var(--blog-muted);
+  font-size: .64rem;
+  text-transform: uppercase;
+}
+
+.blog-page .footer a:hover {
+  color: var(--blog-red);
+}
+
+/* Responsive layout */
+@media (max-width: 700px) {
+  .blog-page .wrap {
+    width: min(100% - 32px, 620px);
+  }
+
+  .blog-page .sitebar-inner {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+    padding: 14px 0;
+  }
+
+  .blog-page .nav {
+    gap: 15px;
+    font-size: .66rem;
+  }
+
+  .blog-page .hero {
+    padding: 61px 0 48px;
+  }
+
+  .blog-page .hero-foot {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .blog-page .section-head {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 5px;
+    padding-top: 32px;
+  }
+
+  .blog-page .entry {
+    grid-template-columns: 1fr;
+    gap: 5px;
+    padding: 22px 0;
+  }
+
+  .blog-page .date {
+    padding: 0;
+  }
+
+  .blog-page .article-layout {
+    width: calc(100% - 36px);
+    padding-top: 40px;
+  }
+
+  .blog-page .article-layout h1 {
+    font-size: clamp(2.25rem, 10vw, 3.2rem);
+  }
+
+  .blog-page .article-body h2 {
+    margin-top: 38px;
+  }
+
+  .blog-page .math-block {
+    padding: 13px 14px;
+  }
+
+  .blog-page pre {
+    padding: 14px;
+    font-size: .75rem;
+  }
+
+  .blog-page .footer {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
