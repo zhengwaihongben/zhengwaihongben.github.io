@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A short note on topology, continuity, and mathematical structure.">
+  <title>Some thoughts about AI replacing human | Journal</title>
+  <link rel="stylesheet" href="../style_blog.css">
+
+  <!-- MathJax configuration: supports LaTeX inline and display mathematics. -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)'], ['$', '$']],
+        displayMath: [['\\[', '\\]'], ['$$', '$$']],
+        processEscapes: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+  <!-- Highlight.js: syntax highlighting for code blocks. -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github.min.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/python.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/cpp.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/sql.min.js"></script>
+  <script defer>
+    document.addEventListener('DOMContentLoaded', function () {
+      if (window.hljs) {
+        document.querySelectorAll('pre code').forEach(function (block) {
+          hljs.highlightElement(block);
+        });
+      }
+    });
+  </script>
+</head>
+
+<body class="blog-page">
+  <header class="sitebar">
+    <div class="wrap sitebar-inner">
+      <a class="brand" href="blog_index_en.html">
+        <span class="brand-mark" aria-hidden="true">\(\Pi\)
+        </span>
+        ZHENG WAI HONG
+      </a>
+      <nav class="nav" aria-label="Article navigation">
+        <a href="blog_index_en.html">← BACK TO ENTRIES</a>
+        <a href="../blog_zh/blog_261125_zh.html" lang="zh-Hant">中</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="article-layout">
+    <div class="article-kicker">Mathematics & Artificial Intelligence</div>
+    <h1>Some Thoughts about Riemann Hypothesis being solved by Claude</h1>
+    <div class="article-meta">Zheng Wai Hong &nbsp; / &nbsp; 25 NOVEMBER 2026 &nbsp; / &nbsp; NOTE 261125
+    <br>
+    Written at 2026.11.24, 01:39, UTC+8</div>
+
+    <section class="abstract" aria-label="Abstract">
+      <strong>ABSTRACT</strong>
+      <p>I do not think that mathematics is done due to AI, but we need to re-examine the results from AI.</p>
+    </section>
+
+    <div class="article-section-label">
+      MAIN BODY
+    </div>
+
+    <div class="article-body">
+
+      <p>
+        On 20 Nov 2026, Riemann Hypothesis(RH) was claimed to be solved by Claude, an AI model, and Levent Alpöge, a technical staff of Anthropic. If you know something about Math, you must know the importance of RH. For me, I have briefly understood the relation between RH and the distribution of prime numbers from my Complex Analysis course, but I am not that professional now so my understanding about RH is still limitted. And, due to the importance of primes, finding their distribution becomes a great work of Number Theory.
+      </p>
+
+      <figure>
+        <img
+          src="../photos_blog/261125/Levent Alpoge.jpg"
+          alt="Galois"
+          style="display: block; width: 35%; height: auto; margin: 0 auto;">
+        <figcaption>
+          Figure 1. Levent Alpöge
+        </figcaption>
+      </figure>
+      
+      <details class = "article-details">
+        <summary>Details about RH</summary>
+        <p>
+          The Zeta function over the real numbers greater than $1$ is defined as:
+        </p>
+        \[
+          \zeta(s) = 1 + \frac{1}{2^s} + \frac{1}{3^s} + \ldots = \sum_{n = 1}^{\infty} \frac{1}{n^s}, \quad \forall s > 1
+        \]
+        <p>
+          The great Bernhard Riemann discovered that $\zeta(s)$ has an analytical continuation over the whole complex plane, which means that there exists a meromorphic function defined on $\mathbb{C}$ such that it is equal to $\zeta(s)$ when $s$ is real and $s > 1$.
+        </p>
+        <p>
+          The analytical continuation of $\zeta(s)$, where we still denote it by $\zeta(s)$, can be expressed by functional equation:
+        </p>
+        \[
+          \zeta(s) = 2^s \pi ^{s-1} \sin\left(\frac{\pi s}{2}\right) \Gamma(1-s) \zeta(1-s)
+        \]
+        <p>where $\Gamma(t)$ is the Gamma function.</p>
+        <p>
+          After Riemann found this, he tried to analyze some basic properties of the function, such the zeros. Since there is a sine, which we have been very familiar with, we can easily know that when $s$ is negative even numbers $-2n, n \in \mathbb{N}$. These zeros are known as "trival zeros". Riemann noticed that the rest of zeros might all lie on the axis with real part of $\frac{1}{2}$(he calculated some zeros by hands). Then, he proposed that all of the non-trivial zeros must have real part of $\frac{1}{2}$, which is now known as Riemann Hypothesis.
+        </p>
+
+        <figure>
+          <img
+            src="../photos_blog/261125/Bernhard Riemann.jpg"
+            alt="Galois"
+            style="display: block; width: 30%; height: auto; margin: 0 auto;">
+          <figcaption>
+            Figure 2. Bernhard Riemann
+          </figcaption>
+        </figure>
+
+        <div class="math-block theorem">
+          <span class="math-label">Riemann Hypothesis</span>
+          For the analytical continuation of $\zeta(s)$ over $\mathbb{C}$, the zeros are only at the negative even integers and at complex numbers with real part $\frac{1}{2}$.
+        </div>
+      </details>
+      
+      <p>
+        So, the fact that RH is solved by AI really depresses the mathematicians, and the voices of AI replacing human mathematicians is keep growing larger. However, I do not think that human mathematicians would be completely useless.
+      </p>
+      <p>
+        In my opinion, the most essential progress of Math still relies on human mathematics, because AI do not yet perform very creatively, at least the published models do not. In detail, AI now are very good at solving problems from established results, but it is still doubtful that whether they can pioneer new fields, or innovated by the existing theories.
+      </p>
+      <p>
+        For example, Évariste Galois intoduced the concept of "Group" to discuss the solvability of the polynomial equations, which is:
+      </p>
+      <blockquote>
+        Do the polynomial equations of degree higher than or equal to $5$ have analytical solutions, or equivalently, whether the solutions can be expressed by the usual algebraic operations of the coefficients of the polynomials.
+      </blockquote>
+      <p>
+        and eventually the complete proof of this problem is expressed by Galois Theory based on Groups, known as the "Abel–Ruffini theorem". We know that the introduction of Groups led to the development of Abstract Algebra, and now the Group theory have been applied on Physics and Computer Science.
+      </p>
+
+      <figure>
+        <img
+          src="../photos_blog/261125/Galois_wiki.jpg"
+          alt="Galois"
+          style="display: block; width: 30%; height: auto; margin: 0 auto;"
+        >
+        <figcaption>
+          Figure 3. Évariste Galois
+        </figcaption>
+      </figure>
+
+      <p>
+        What I want to emphasize is that AI do not have this kind of groundbreaking creativity yet, and so human mathematicians remain valuable. Nonetheless, most of the math guys would indeed be replaced because not everyone is Galois or Gauss.
+      </p>
+      <p>
+        One more thing that I want to discuss is the constructive development of mathematical community. This thought was inspired by Terrence Tao on Mathstodon (<a href="https://mathstodon.xyz/@tao/117395267721642920" target="_blank" rel="noopener noreferrer">Tao's post</a>). In traditional mathematics, mathematicians discuss their understanding of the theories and proofs. A proof is established only after some experts reviewed the papers and confirmed that there were no more problems. During this process, the proofs are understood and the ideas are spreaded throughout the community, and become a part of the textbooks eventually. Meanwhile, some new ideas might be inspired by the proofs and then the new hypothesis and theories are proposed. This is how Math evolved.
+      </p>
+      <p>
+        In these days, however, the hypotheses are proven by AI in massive, and papers that no one can understand are produced. This is disastrious because we just know what, but without why, which is lack of sustainability. Just after the news of Cluade solving RH, a mathematicians Alessandro Masullo from Standford release his unfinishied proof of General RH. I actually think that his work is more valuable than that of Claude, although some problems are found. 
+      </p>
+      <p>
+        Overall, I do not mean to stop developing AI. I want to emphasize that we need to re-examine these proofs from AI. We need to build a solid and holistic understanding to the results, and make math be sustainable.
+      </p>
+
+      <section class="sources">
+        <h2>Sources</h2>
+        <ol>
+          <li>
+              <a href="https://darwinthenandnow.com/scientific-revolution/bernhard-riemann/" target="_blank" rel="noopener noreferrer"> Figure 1. Levent Alpöge</a>
+          </li>
+        
+          <li>
+            <a href="https://darwinthenandnow.com/scientific-revolution/bernhard-riemann/" target="_blank" rel="noopener noreferrer">Figure 2. Bernhard Riemann</a>
+          </li>
+          <li>
+            <a href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRdPb8EqVERvJLbAzg-f0mU3I8dAMBwH3UwO3JX3fhkQ&s=10" target="_blank" rel="noopener noreferrer">Figure 3. Évariste Galois</a>
+          </li>
+          <li>
+            <a href="https://mathstodon.xyz/@tao/117395267721642920" target="_blank" rel="noopener noreferrer">Tao's post on Mathstodon</a>
+          </li>
+        </ol>
+      </section>
+
+    </div>
+
+    <div class="article-end">
+      END OF THIS NOTE
+    </div>
+  </main>
+
+  <footer class="wrap footer">
+    <span>© PERSONAL JOURNAL of ZHENG WAI HONG</span>
+    <a href="blog_index_en.html">← BACK TO ENTRIES</a>
+  </footer>
+</body>
+</html>
