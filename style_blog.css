@@ -5,7 +5,7 @@
    ========================================================= */
 
 :root {
-  --blog-paper: #fbfaf5;
+  --blog-paper: #fbf8ed;
   --blog-ink: #1a1a1a;
   --blog-muted: #73736d;
   --blog-red: #7a2028;
@@ -83,7 +83,7 @@
 /* Header and navigation */
 .blog-page .sitebar {
   border-bottom: 1px solid var(--blog-rule);
-  background: rgba(251, 250, 245, .96);
+  background: #fef9e7;
 }
 
 .blog-page .sitebar-inner {
@@ -268,17 +268,16 @@
 }
 
 .blog-page .article-meta {
-  margin: 17px 0 34px;
+  margin: 16px 0 32px;
   color: var(--blog-muted);
   font-size: .66rem;
   text-transform: uppercase;
 }
 
 .blog-page .abstract {
-  margin: 30px 0 38px;
-  padding: 19px 0 21px;
+  margin: 32px 0 32px;
+  padding: 16px 0 0px;
   border-top: 1px solid var(--blog-rule);
-  border-bottom: 1px solid var(--blog-rule);
   color: #4e4e49;
 }
 
@@ -323,12 +322,19 @@
   margin: 5px 0;
 }
 
-.blog-page .article-body blockquote {
+/* ---------- Blockquote ---------- */
+
+.blog-page blockquote {
   margin: 24px 0;
-  padding: 5px 0 5px 20px;
-  border-left: 2px solid var(--blog-rule);
+  padding: 12px 20px;
+
+  border-left: 3px solid var(--blog-rule);
+
   color: var(--blog-muted);
   font-style: italic;
+  line-height: 1.8;
+  background: rgba(0, 0, 0, 0.02);
+  font-size: 0.9rem;
 }
 
 .blog-page .article-body a,
@@ -413,7 +419,7 @@
   padding: 17px 12px;
   text-align: center;
   overflow-x: auto;
-  background: rgba(255, 255, 255, .45);
+  background: #fbf8ed;
 }
 
 .blog-page .math-inline {
@@ -426,6 +432,59 @@
   overflow-x: auto;
   overflow-y: hidden;
   padding: 3px 0;
+}
+
+/* ---------- Article Section Label ---------- */
+
+.blog-page .article-section-label {
+  margin: 24px 0 24px;
+  padding-top: 16px;
+  display: block;
+  border-top: 1px solid var(--blog-rule);
+  margin-bottom: 7px;
+  color: var(--blog-red);
+  font-family: var(--blog-mono);
+  font-size: .66rem;
+  letter-spacing: .07em;
+  font-weight: bold;
+}
+
+/* ---------- Details / Collapsible Section ---------- */
+
+.blog-page .article-details {
+  margin: 24px 0;
+  border: none;
+}
+
+.blog-page .article-details summary {
+  padding: 10px 0;
+  cursor: pointer;
+  font-size: 0.8rem;
+  color: var(--blog-ink);
+  list-style: disclosure-closed;
+}
+
+.blog-page .article-details summary:hover {
+  color: var(--blog-blue);
+}
+
+/* 展開時：標題下方的橫線 */
+.blog-page .article-details[open] summary {
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--blog-rule);
+}
+
+/* 展開時：整個內容區域的底部橫線 */
+.blog-page .article-details[open] {
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--blog-rule);
+}
+
+/* 展開內容 */
+.blog-page .article-details .details-content {
+  padding: 0;
+  color: var(--blog-muted);
 }
 
 /* Code blocks and syntax highlighting */
@@ -532,12 +591,12 @@
 }
 
 .blog-page .article-end {
-  margin-top: 52px;
+  margin-top: 32px;
   padding-top: 18px;
-  border-top: 3px double var(--blog-ink);
+  border-top: 1px solid var(--blog-rule);
   color: var(--blog-muted);
   font-family: var(--blog-mono);
-  font-size: .66rem;
+  font-size: .64rem;
   letter-spacing: .04em;
   text-transform: uppercase;
 }
@@ -547,8 +606,7 @@
   display: flex;
   justify-content: space-between;
   gap: 20px;
-  padding: 24px 0 34px;
-  border-top: 1px solid var(--blog-rule);
+  padding: 0px 0 24px;
   color: var(--blog-muted);
   font-size: .64rem;
   text-transform: uppercase;
@@ -629,4 +687,45 @@
     flex-direction: column;
     gap: 8px;
   }
+}
+
+/* ---------- Sources / Image Credits ---------- */
+
+.blog-page .sources {
+  margin-top: 32px;
+  padding: 16px 0 0px;
+  border-top: 1px solid var(--blog-rule);
+}
+
+.blog-page .sources h2 {
+  margin: 0 0 14px;
+  color: var(--blog-red);
+  font-family: var(--blog-mono);
+  font-size: .66rem;
+  font-weight: bold;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+
+.blog-page .sources ol {
+  padding-left: 1.5rem;
+  margin: 0;
+}
+
+.blog-page .sources li {
+  margin: 9px 0;
+  color: var(--blog-muted);
+  font-size: .88rem;
+  line-height: 1.7;
+}
+
+.blog-page .sources a {
+  color: var(--blog-blue);
+  border-bottom: 1px solid rgba(40, 77, 114, .28);
+  overflow-wrap: anywhere;
+}
+
+.blog-page .sources a:hover {
+  color: var(--blog-red);
+  border-color: var(--blog-red);
 }
