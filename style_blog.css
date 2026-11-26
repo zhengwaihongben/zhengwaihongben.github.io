@@ -729,3 +729,13 @@
   color: var(--blog-red);
   border-color: var(--blog-red);
 }
+
+/* ---------- Traditional Chinese Typography ---------- */
+
+.blog-page:lang(zh-Hant) {
+  line-height: 1.95;
+}
+
+.blog-page:lang(zh-Hant) .article-body p {
+  margin: 16px 0;
+}
