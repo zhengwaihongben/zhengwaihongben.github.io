@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A short note on topology, continuity, and mathematical structure.">
+  <title>關於 Claude 解決黎曼猜想的一些看法 | 藻思錄</title>
+  <link rel="stylesheet" href="../style_blog.css">
+
+  <!-- MathJax configuration: supports LaTeX inline and display mathematics. -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)'], ['$', '$']],
+        displayMath: [['\\[', '\\]'], ['$$', '$$']],
+        processEscapes: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+  <!-- Highlight.js: syntax highlighting for code blocks. -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github.min.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/python.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/cpp.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/sql.min.js"></script>
+  <script defer>
+    document.addEventListener('DOMContentLoaded', function () {
+      if (window.hljs) {
+        document.querySelectorAll('pre code').forEach(function (block) {
+          hljs.highlightElement(block);
+        });
+      }
+    });
+  </script>
+</head>
+
+<body class="blog-page">
+  <header class="sitebar">
+    <div class="wrap sitebar-inner">
+      <a class="brand" href="blog_index_zh.html">
+        <span class="brand-mark" aria-hidden="true">\(\Pi\)
+        </span>
+        鄭偉航
+      </a>
+      <nav class="nav" aria-label="Article navigation">
+        <a href="blog_index_zh.html">← 條目列表</a>
+        <a href="../blog_en/blog_261125_en.html" lang="en">En</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="article-layout">
+    <div class="article-kicker">數學 & 人工智能</div>
+    <h1>關於 Claude 解決黎曼猜想的一些看法</h1>
+    <div class="article-meta">鄭偉航 &nbsp; / &nbsp; 2026年11月25日 &nbsp; / &nbsp; 札 261125
+    <br>
+    原稿寫於 2026.11.24, 01:39, UTC+8</div>
+
+    <section class="abstract" aria-label="Abstract">
+      <strong>摘要</strong>
+      <p>數學未死，世人當謹慎看待 AI 的證明對數學的貢獻。</p>
+    </section>
+
+    <div class="article-section-label">
+      內文
+    </div>
+
+    <div class="article-body">
+
+      <p>
+        2026年11月20日，Anthropic 的一位叫 Levent Alpöge 的技術人員聲稱利用 Claude 證明了黎曼猜想(Riemann Hypothesis, RH)。如果你對數學有一定的了解，你就會知道 RH 的重要性。我個人目前只知道 RH 與素數分布的一些關係，但不是很了解，是在「複變函數」課上學到的。由於素數的重要性，數論的一大研究方向就是嘗試找到素數的分布。
+      </p>
+
+      <figure>
+        <img
+          src="../photos_blog/261125/Levent Alpoge.jpg"
+          alt="Galois"
+          style="display: block; width: 35%; height: auto; margin: 0 auto;">
+        <figcaption>
+          圖 1：Levent Alpöge
+        </figcaption>
+      </figure>
+      
+      <details class = "article-details">
+        <summary>RH 的簡述</summary>
+        <p>
+          在大於 $1$ 的實數上，zeta 函數的定義為：
+        </p>
+        \[
+          \zeta(s) = 1 + \frac{1}{2^s} + \frac{1}{3^s} + \ldots = \sum_{n = 1}^{\infty} \frac{1}{n^s}, \quad \forall s > 1
+        \]
+        <p>
+          伯恩哈德．黎曼發現 $\zeta(s)$ 可以被解析延拓到整個複數上，也就是存在一個定義在 $\mathbb{C}$ 上的亞純函數，使得其在大於 $1$ 的實數上時，等同於 $\zeta(s)$。
+        </p>
+        <p>
+          我們仍把 $\zeta(s)$ 在 $\mathbb{C}$ 上的解析延拓記作 $\zeta(s)$，其形式可以以函數方程的形式表示為：
+        </p>
+        \[
+          \zeta(s) = 2^s \pi ^{s-1} \sin\left(\frac{\pi s}{2}\right) \Gamma(1-s) \zeta(1-s)
+        \]
+        <p>其中 $\Gamma(t)$ 是 Gamma 函數。</p>
+        <p>
+          在黎曼發現了 $\zeta(s)$ 的解析延拓後，他開始研究其的一些基本性質，如零點。由於表達式中有正弦，所以很明顯地負偶數是其零點，這些零點被稱為「平凡零點」。同時，黎曼在手算了幾個非平凡零點後，發現這些零點的實部都是 $\frac{1}{2}$ ，於是他猜測所有非平凡零點的實部都是 $\frac{1}{2}$ 此即所謂的「黎曼猜想」。
+        </p>
+
+        <figure>
+          <img
+            src="../photos_blog/261125/Bernhard Riemann.jpg"
+            alt="Galois"
+            style="display: block; width: 30%; height: auto; margin: 0 auto;">
+          <figcaption>
+            圖 2：Bernhard Riemann
+          </figcaption>
+        </figure>
+
+        <div class="math-block theorem">
+          <span class="math-label">黎曼猜想</span>
+          對於 $\zeta(s)$ 在 $\mathbb{C}$ 上的解析延拓，其非平凡零點全在實部為 $\frac{1}{2}$ 的軸上。
+        </div>
+      </details>
+      
+      <p>
+        RH 被 AI 解決的消息的確很令人沮喪，數學家已被淘汰的聲音又被推到浪尖，但我個人有一些不同的看法。
+      </p>
+      <p>
+        我認為目前數學的底層進展仍需要數學家來推動，因為 AI ，至少目前已公開的模型，尚未展示出有創造新的範式的能力。具體地，目前 AI 極擅長基於已有的內容去解決問題（包括通過一些人類幾乎無法做到的方法），但是否能夠創造新的領域，或者被現有理論所啟發，目前仍存疑。
+      </p>
+      <p>
+        例如，伽羅瓦(Évariste Galois)為了解決多項式方程的可解性而引入了「群」的概念。這個問題的具體表述為：
+      </p>
+      <blockquote>
+        五次或以上的多項式方程是否有解析解？或等價地，其解是否能通過方程的系數的基本代數運算表示？
+      </blockquote>
+      <p>
+        而最後這個問題的完整證明確是用基於群的伽羅瓦理論完成的，即所謂的「阿貝爾—魯菲尼定理」。事實上，群的引入開啟了現代代數的發展，並最終被發現可以應用到物理和計算機等領域。
+      </p>
+
+      <figure>
+        <img
+          src="../photos_blog/261125/Galois_wiki.jpg"
+          alt="Galois"
+          style="display: block; width: 30%; height: auto; margin: 0 auto;"
+        >
+        <figcaption>
+          圖 3：Évariste Galois
+        </figcaption>
+      </figure>
+
+      <p>
+        我想強調的是 AI 目前尚未有這樣的創造力，所以數學家仍有其價值所在。不過，大部分數學工作者的確會失業，畢竟像伽羅瓦、高斯這樣的人只是極少數。另外，我也相信 AI 終有一日可以有這樣的創造力。
+      </p>
+      <p>
+        另一點是關於數學的發展，這個想法啟發自陶哲軒在 Mathstodon 上的條文(<a href="https://mathstodon.xyz/@tao/117395267721642920" target="_blank" rel="noopener noreferrer">陶的條文</a>)。在傳統數學中，數學家們會討論他們對數學問題的理理解，而一個證明只有被一些同行嚴格審查並通過後才會被接受是成立的。在此過程中，證明的思想被業內的人所理解、消化，然後被廣為認同，最終會變成教材上的內容。同時，一些新的想法可能會被啟發，然後就會有新的猜想出現。這是數學演化的方式。
+      </p>
+      <p>
+        但現在，數學問題被 AI 批量化地解決，同時有一堆沒人看得懂的證明被生產出來，這對數學的發展其實是災難性的，因為我們只知道結果，而不知道具體為甚麼，沒有新的人願意投入研究，使得數學的發展失去了可持續性。就在 RH 聲稱被 Claude 解決後，一個 Standford 的數學家 Alessandro Masullo 也緊急地公開了他對廣義 RH 的證明，而他原本打算再用不少時間去完善這份證明。雖然之後他的證明被指出有問題，但就數學的發展而言，我認為他的工作是更有價值的。
+      </p>
+      <p>
+        總的來說，我並不是主張要停止發展 AI，我只是希望我們要重新審視 AI 的證明，我們需要對結果有紮實和全面的理解，這才能令數學可以持續性地發展。
+      </p>
+
+      <section class="sources">
+        <h2>來源</h2>
+        <ol>
+          <li>
+              <a href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXd7xtulHZc9jOqvmGnK1qz3SNdWqz7g-HihyHhJm2IQ&s=10" target="_blank" rel="noopener noreferrer"> Figure 1. Levent Alpöge</a>
+          </li>
+        
+          <li>
+            <a href="https://darwinthenandnow.com/scientific-revolution/bernhard-riemann/" target="_blank" rel="noopener noreferrer">Figure 2. Bernhard Riemann</a>
+          </li>
+          <li>
+            <a href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRdPb8EqVERvJLbAzg-f0mU3I8dAMBwH3UwO3JX3fhkQ&s=10" target="_blank" rel="noopener noreferrer">Figure 3. Évariste Galois</a>
+          </li>
+          <li>
+            <a href="https://mathstodon.xyz/@tao/117395267721642920" target="_blank" rel="noopener noreferrer">Tao's post on Mathstodon</a>
+          </li>
+        </ol>
+      </section>
+
+    </div>
+
+    <div class="article-end">
+      完
+    </div>
+  </main>
+
+  <footer class="wrap footer">
+    <span>© 藻思錄—鄭偉航</span>
+    <a href="blog_index_zh.html">← 條目列表</a>
+  </footer>
+</body>
+</html>
